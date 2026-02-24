@@ -4,9 +4,12 @@ class CommentsController < ApplicationController
         @comment = Comment.new(comment_params)
         @comment.article_id = params[:article_id]
       
-        @comment.save
-      
-        redirect_to article_path(@comment.article)
+        if @comment.save
+          redirect_to article_path(@comment.article)
+        else
+          @article = @comment.article
+          render 'articles/show'
+        end
       end
       
       def comment_params

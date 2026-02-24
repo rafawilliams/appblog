@@ -1,5 +1,9 @@
-<div>
-  <h4>Comment by <%= comment.author_name %></h4>
-  <p class="comment"><%= comment.body %></p>
+<div class="card bg-light border-0 mb-3">
+  <div class="card-body py-3 px-4">
+    <div class="d-flex w-100 justify-content-between align-items-center mb-2">
+      <h6 class="mb-0 fw-bold"><%= comment.author_name %></h6>
+      <small class="text-muted"><%= distance_of_time_in_words(comment.article.created_at, comment.created_at) %> later</small>
+    </div>
+    <p class="mb-0 text-dark" style="white-space: pre-wrap;"><%= comment.body %></p>
+  </div>
 </div>
-<p>Posted <%= distance_of_time_in_words(comment.article.created_at, comment.created_at) %> later</p>

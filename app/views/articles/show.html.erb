@@ -1,8 +1,33 @@
-<h1><%= @article.title %></h1>
-<p><%= @article.body %></p>
-<%= link_to "<< Back to Articles List", articles_path %>
-<%= render partial: 'comments/form' %>
-<%= link_to "delete", article_path(@article), method: :delete, data: {confirm: "Really delete the article?"} %>
-<%= link_to "edit", edit_article_path(@article) %>
-<h3>Comments (<%= @article.comments.size %>)</h3>
-<%= render partial: 'articles/comment', collection: @article.comments.reverse %>
+<div class="row justify-content-center mb-5">
+  <div class="col-lg-8">
+    <article class="bg-white p-5 rounded-4 shadow-sm">
+      <header class="mb-5 text-center">
+        <h1 class="fw-bolder mb-3" style="font-size: 3rem; letter-spacing: -0.04em; color: #111827;"><%= @article.title %></h1>
+        <p class="text-muted">Published on <%= @article.created_at.strftime("%B %d, %Y") %></p>
+      </header>
+      
+      <div class="article-content fs-5" style="line-height: 1.8; color: #374151; white-space: pre-wrap;"><%= @article.body %></div>
+      
+      <div class="mt-5 pt-4 border-top d-flex gap-2 justify-content-center">
+        <%= link_to "&larr; All Articles".html_safe, articles_path, class: "btn btn-light px-4" %>
+        <%= link_to "Edit Article", edit_article_path(@article), class: "btn btn-outline-primary px-4" %>
+        <%= link_to "Delete", article_path(@article), method: :delete, data: {confirm: "Really delete the article?"}, class: "btn btn-outline-danger px-4" %>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <h3 class="mb-4">Comments (<%= @article.comments.size %>)</h3>
+    <div class="mb-5">
+      <%= render partial: 'articles/comment', collection: @article.comments.reverse %>
+    </div>
+    
+    <div class="card bg-light">
+      <div class="card-body">
+        <%= render partial: 'comments/form' %>
+      </div>
+    </div>
+  </div>
+</div>

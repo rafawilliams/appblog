@@ -1,15 +1,24 @@
-<h3>Post a Comment</h3>
+<h3 class="mb-3">Post a Comment</h3>
 
 <%= form_for [ @article, @comment ] do |f| %>
-  <p>
-    <%= f.label :author_name %><br/>
-    <%= f.text_field :author_name %>
-  </p>
-  <p>
-    <%= f.label :body %><br/>
-    <%= f.text_area :body %>
-  </p>
-  <p>
-    <%= f.submit 'Submit' %>
-  </p>
+  <% if @comment.errors.any? %>
+    <div class="alert alert-danger">
+      <ul class="mb-0">
+      <% @comment.errors.full_messages.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="mb-3">
+    <%= f.label :author_name, "Your Name", class: "form-label fw-bold" %>
+    <%= f.text_field :author_name, class: "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :body, "Comment", class: "form-label fw-bold" %>
+    <%= f.text_area :body, class: "form-control", rows: 4 %>
+  </div>
+  <div class="mb-3">
+    <%= f.submit 'Submit', class: "btn btn-primary" %>
+  </div>
 <% end %>
