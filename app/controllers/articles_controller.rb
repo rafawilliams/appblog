@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
     include ArticlesHelper
+    before_action :authenticate_user!, except: [:index, :show]
 
 
     def index
@@ -20,6 +21,7 @@ class ArticlesController < ApplicationController
     
     def create 
         @article = Article.new(article_params)
+        @article.user_id = current_user.id if user_signed_in?
         if @article.save
             redirect_to article_path(@article)
         else

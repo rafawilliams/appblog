@@ -1,0 +1,41 @@
+<div class="row justify-content-center mb-5 mt-4">
+  <div class="col-md-8 col-lg-5">
+    <div class="card shadow-sm p-4 border-0">
+      <div class="card-body">
+        <h2 class="fw-bolder mb-4 text-center" style="letter-spacing: -0.05em;">Create an Account</h2>
+
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+
+          <div class="mb-3">
+            <%= f.label :email, class: "form-label fw-bold text-muted small text-uppercase" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :password, class: "form-label fw-bold text-muted small text-uppercase" %>
+            <% if @minimum_password_length %>
+            <small class="text-muted d-block mb-1">(<%= @minimum_password_length %> characters minimum)</small>
+            <% end %>
+            <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-lg" %>
+          </div>
+
+          <div class="mb-4">
+            <%= f.label :password_confirmation, class: "form-label fw-bold text-muted small text-uppercase" %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-lg" %>
+          </div>
+
+          <div class="d-grid mb-4">
+            <%= f.submit "Sign up", class: "btn btn-primary btn-lg" %>
+          </div>
+        <% end %>
+
+        <div class="text-center mt-3 pt-3 border-top">
+          <small class="text-muted">
+            <%= render "devise/shared/links" %>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

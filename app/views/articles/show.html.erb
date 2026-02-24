@@ -10,8 +10,10 @@
       
       <div class="mt-5 pt-4 border-top d-flex gap-2 justify-content-center">
         <%= link_to "&larr; All Articles".html_safe, articles_path, class: "btn btn-light px-4" %>
-        <%= link_to "Edit Article", edit_article_path(@article), class: "btn btn-outline-primary px-4" %>
-        <%= link_to "Delete", article_path(@article), method: :delete, data: {confirm: "Really delete the article?"}, class: "btn btn-outline-danger px-4" %>
+        <% if user_signed_in? && current_user == @article.user %>
+          <%= link_to "Edit Article", edit_article_path(@article), class: "btn btn-outline-primary px-4" %>
+          <%= link_to "Delete", article_path(@article), method: :delete, data: {confirm: "Really delete the article?"}, class: "btn btn-outline-danger px-4" %>
+        <% end %>
       </div>
     </article>
   </div>
