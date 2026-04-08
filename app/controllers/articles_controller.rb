@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
     include ArticlesHelper
     before_action :authenticate_user!, except: [:index, :show]
+    before_action :check_ownership, only: [:edit, :update, :destroy]
 
 
     def index
@@ -47,5 +48,19 @@ class ArticlesController < ApplicationController
         else
             render :edit
         end
-      end
+    end
+
+    private
+
+    def check_ownership
+        @article = Article.find(params[:id])
+        unless @article.user == current_user
+            flash[:alert] = "You are not authorized to perform this action."
+            redirect_to articles_path
+        end
+    end
+
+    def article_params
+        params.require(:article).permit(:title, :body)
+    end
 end
