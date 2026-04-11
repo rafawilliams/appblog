@@ -1,18 +1,24 @@
 <%= form_for(@article) do |f| %>
-  <ul>
-  <% @article.errors.full_messages.each do |error| %>
-    <li><%= error %></li>
+  <% if @article.errors.any? %>
+    <div class="alert alert-danger">
+      <ul class="mb-0">
+      <% @article.errors.full_messages.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+      </ul>
+    </div>
   <% end %>
-  </ul>
-  <p>
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
+
+  <div class="mb-3">
+    <%= f.label :title, class: "form-label fw-bold" %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :body, class: "form-label fw-bold" %>
+    <%= f.text_area :body, class: "form-control", rows: 10 %>
+  </div>
+  <div class="mb-3">
+    <%= f.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", articles_path, class: "btn btn-light ms-2" %>
+  </div>
 <% end %>
